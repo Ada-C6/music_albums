@@ -28,6 +28,13 @@ class ArtistControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  test "Creating a Artist changes the number of artists" do
+    assert_difference("Artist.count", 1) do
+      post_params = {artist: {name: "Regina Spektor"}  }
+      post :create, post_params
+    end
+  end
+
   test "should be able to update an artist" do
     patch :update, {id: 1}
     assert_response :success
