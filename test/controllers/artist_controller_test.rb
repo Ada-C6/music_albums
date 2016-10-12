@@ -41,8 +41,17 @@ class ArtistControllerTest < ActionController::TestCase
   end
 
   test "should be able to delete" do
-    delete :destroy, {id: 1}
-    assert_response :success
+    delete :destroy, {id: artists(:bonjovi).id}
+    assert_response :redirect
   end
+
+  test "should be able to delete Bon Jovi" do
+    assert_difference("Artist.count", -1) do
+      delete :destroy, {id: artists(:bonjovi).id}
+      assert_response :redirect
+    end
+  end
+
+
 
 end
